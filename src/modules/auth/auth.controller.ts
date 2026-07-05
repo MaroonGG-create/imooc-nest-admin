@@ -1,9 +1,22 @@
-import { Controller, Get } from '@nestjs/common';
-
+import { Body, Controller, Post, UseFilters } from '@nestjs/common';
+import { Public } from './public.decorator';
+import { AuthService } from './auth.service';
+import { HttpExceptionFilter } from '../../exception/http-exception.filter';
+import { success, error } from 'src/utils';
+interface LoginDto {
+  username: string;
+  password: string;
+}
 @Controller('auth')
 export class AuthController {
-  @Get()
-  getAuth() {
-    return 'This is auth';
+  constructor(private authService: AuthService) {}
+  @Public()
+  @Post('login')
+  @UseFilters(new HttpExceptionFilter())
+  async login(@Body() params: LoginDto) {
+    return await this.authService
+      .login(params.username, params.password)
+      .then((data) => success(data, '登录成功'))
+      .catch((err) => error(err.message));
   }
 }

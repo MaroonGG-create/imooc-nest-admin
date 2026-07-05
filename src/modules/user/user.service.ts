@@ -8,14 +8,12 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-  ) { }
+  ) {}
 
   findOne(id: number): Promise<User | null> {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     return this.userRepository.findOneBy({ id });
   }
   findAll(): Promise<User[]> {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     return this.userRepository.find();
   }
 
@@ -32,5 +30,9 @@ export class UserService {
 
   remove(id: number): Promise<DeleteResult> {
     return this.userRepository.delete(id);
+  }
+
+  findByUsername(username: string): Promise<User | null> {
+    return this.userRepository.findOneBy({ username });
   }
 }
