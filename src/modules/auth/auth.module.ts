@@ -5,12 +5,13 @@ import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth.guard';
 import { UserModule } from '../user/user.module';
 import { JwtModule } from '@nestjs/jwt';
+import { JWT_SECRET_KEY } from './auth.jwt.secret';
 @Module({
   imports: [
     UserModule,
     JwtModule.register({
       global: true,
-      secret: 'abcdefg',
+      secret: JWT_SECRET_KEY,
       signOptions: { expiresIn: '24h' },
     }),
   ],

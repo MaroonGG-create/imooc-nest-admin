@@ -1,14 +1,14 @@
 export function success(data: unknown, msg: string) {
   return {
     code: 0,
-    data,
-    msg,
+    result: data,
+    message: msg,
   };
 }
 
 export function error(msg: string) {
   return {
     code: -1,
-    msg,
+    message: msg,
   };
 }
