@@ -12,3 +12,16 @@ export function error(msg: string) {
     message: msg,
   };
 }
+
+export async function wrapperResponse<T>(
+  p: T | Promise<T>,
+  msg = 'success',
+) {
+  try {
+    const data = await Promise.resolve(p);
+    return success(data, msg);
+  } catch (err) {
+    const message = err instanceof Error ? err.message : '请求失败';
+    return error(message);
+  }
+}

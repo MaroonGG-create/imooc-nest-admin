@@ -2,7 +2,7 @@ import { Body, Controller, Post, UseFilters } from '@nestjs/common';
 import { Public } from './public.decorator';
 import { AuthService } from './auth.service';
 import { HttpExceptionFilter } from '../../exception/http-exception.filter';
-import { success, error } from 'src/utils';
+import { wrapperResponse } from '../../utils';
 interface LoginDto {
   username: string;
   password: string;
@@ -14,9 +14,10 @@ export class AuthController {
   @Post('login')
   @UseFilters(new HttpExceptionFilter())
   async login(@Body() params: LoginDto) {
-    return await this.authService
-      .login(params.username, params.password)
-      .then((data) => success(data, '登录成功'))
-      .catch((err) => error(err.message));
+    const data = await this.authService.login(
+      params.username,
+      params.password,
+    );
+    return wrapperResponse(data, '登录成功');
   }
-}
+  }
