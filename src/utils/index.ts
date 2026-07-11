@@ -1,6 +1,6 @@
 export function success(data: unknown, msg: string) {
   return {
-    code: 0,
+    code: 1,
     result: data,
     message: msg,
   };

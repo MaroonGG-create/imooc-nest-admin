@@ -13,6 +13,11 @@ import { wrapperResponse } from '../../utils';
 @Controller('menu')
 export class MenuController {
   constructor(private readonly menuService: MenuService) {}
+
+  @Get('active')
+  getActiveMenu() {
+    return wrapperResponse(this.menuService.findActive(),'获取菜单成功');
+  }
   @Get('info')
   getUserByToken(@Req() request: any) {
     // return wrapperResponse(
