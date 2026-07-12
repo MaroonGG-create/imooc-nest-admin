@@ -810,18 +810,12 @@
     "path": "/flow",
     "name": "FlowDemo",
     "redirect": "/flow/flowChart",
-    "meta": {
-      "orderNo": 5000,
-      "icon": "tabler:chart-dots",
-      "title": "routes.demo.flow.name"
-    },
+    "meta": {"orderNo": 5000,"icon": "tabler:chart-dots","title": "routes.demo.flow.name"},
     "children": [
       {
         "path": "flowChart",
         "name": "flowChartDemo",
-        "meta": {
-          "title": "routes.demo.flow.flowChart"
-        }
+        "meta": {"title": "routes.demo.flow.flowChart"}
       }
     ]
   },

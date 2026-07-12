@@ -7,9 +7,10 @@ import {
   ParseIntPipe,
   Post,
   Req,
+  Put,
 } from '@nestjs/common';
 import { MenuService } from './menu.service';
-import { wrapperResponse } from '../../utils';
+import { error, wrapperResponse } from '../../utils';
 @Controller('menu')
 export class MenuController {
   constructor(private readonly menuService: MenuService) {}
@@ -32,13 +33,22 @@ export class MenuController {
 
   @Get()
   getAllMenu() {
-    return wrapperResponse(this.menuService.findAll(),'获取菜单成功');
+    return wrapperResponse(this.menuService.findAll(), '获取菜单成功');
   }
 
-  @Post()
+  @Post('create')
   createMenu(@Body() body: any) {
-    // console.log(body);
-    // return this.userService.createUser(body);
+    console.log('body', body);
+    return wrapperResponse(this.menuService.createMenu(body), '创建菜单成功');
+  }
+  @Put('update')
+  async updateMenu(@Body() body: any) {
+    try {
+      return await this.menuService.updateMenu(body);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : '请求失败';
+      return error(message);
+    }
   }
 
   @Delete('/:id')

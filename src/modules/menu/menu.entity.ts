@@ -24,7 +24,7 @@ export class Menu {
   meta!: string;
 
   @Column()
-  pid!: string;
+  pid!: number;
 
   @Column({ default: 1 })
   active!: number;
