@@ -76,13 +76,18 @@ export class MenuService {
       const sameNameMenu = await this.menuRepository.findOneBy({
         name: updateData.name,
       });
-
       if (sameNameMenu && sameNameMenu.id !== id) {
         throw new Error('菜单名称已存在');
       }
     }
 
-    return this.menuRepository.update(id, updateData);
+    const result = await this.menuRepository.update(id, updateData);
+
+    if (!result.affected) {
+      throw new Error('菜单更新失败');
+    }
+
+    return this.menuRepository.findOneBy({ id });
   }
 
   private normalizeMeta(meta: unknown) {

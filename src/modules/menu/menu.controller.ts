@@ -43,12 +43,13 @@ export class MenuController {
   }
   @Put('update')
   async updateMenu(@Body() body: any) {
-    try {
-      return await this.menuService.updateMenu(body);
-    } catch (err) {
-      const message = err instanceof Error ? err.message : '请求失败';
-      return error(message);
-    }
+    return wrapperResponse(this.menuService.updateMenu(body), '修改菜单成功');
+    // try {
+    //   return await 
+    // } catch (err) {
+    //   const message = err instanceof Error ? err.message : '请求失败';
+    //   return error(message);
+    // }
   }
 
   @Delete('/:id')
