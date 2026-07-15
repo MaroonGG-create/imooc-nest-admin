@@ -16,7 +16,7 @@ import { MenuModule } from './modules/menu/menu.module';
       password: 'xlj121292151',
       database: 'vben-book-dev',
       autoLoadEntities: true,
-      synchronize: true, //不能用于生产环境
+      // synchronize: true, //不能用于生产环境
       charset: 'utf8mb4',
     }),
     UserModule,
