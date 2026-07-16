@@ -13,7 +13,7 @@ import { MenuModule } from './modules/menu/menu.module';
       host: '127.0.0.1',
       port: 3306,
       username: 'root',
-      password: 'xlj121292151',
+      password: '123456',
       database: 'vben-book-dev',
       autoLoadEntities: true,
       // synchronize: true, //不能用于生产环境

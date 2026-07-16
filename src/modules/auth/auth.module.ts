@@ -12,7 +12,7 @@ import { JWT_SECRET_KEY } from './auth.jwt.secret';
     JwtModule.register({
       global: true,
       secret: JWT_SECRET_KEY,
-      signOptions: { expiresIn: '24h' },
+      signOptions: { expiresIn: 60 * 60 * 24 * 30 },
     }),
   ],
   controllers: [AuthController],
